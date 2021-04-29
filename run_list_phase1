@@ -1,0 +1,58 @@
+
+#This is the 'Phase 1' run_list for the first part of the A,C,H trial experiment (evolving ancestors)
+
+set email alphadynamics21@gmail.com  # User's e-mail address
+
+set freq_email Crash    # Frequency status is e-mailed to you.  Choices are:
+                        #   job -- when this job is completed (default)
+                        #   run -- when each run is completed
+                        #   crash -- when a run crashes
+                        #   never -- no e-mail is sent
+
+set priority 3          # Priority of the job.  Normally an integer between 1
+                        # (low priority) and 5 (high priority)  where 3 is the
+                        # default priority.
+
+set walltime 8			#Amount of time (# hours) requested for a single run
+set mem_request 8	#Amount of memory (gigabytes) requested for a run
+set ppn 1				#Processors per node
+set dest_dir output_phase1	# Where output directories should go
+											# (default is current directory):
+
+set description TRIAL_RUN_ANALYZE
+
+set class_pref 99       # Which class you want to run your runs on
+                        # you wish to run your programs on.  Current classes:
+                        # class   GHz  GB Discription
+                        #    91  2.1   7 AMD based, Western Digital Cluster (109 disk image)
+                        #    92  2.33  15 Intel based, SGI Cluster (109 disk image)
+                        #    94  ????  256 AMD based Sun "FAT" nodes (109 disk image) -- currently only accessible with class 99
+                        #    99  pseudo class consisting of class 91, 92 and 94
+                        # Defualt = 99
+
+set max_cpus 1         # Maximum number of CPUs that this job can run on
+                        # default=1
+
+
+set config_dir config # directory containing input and executable files
+                        # if name has leading / use the absolute path name
+                        # else use a path relative to the directory
+                        # containing this run_list file
+
+#Takes < 1.5 min for the first 100 updates; triple that to get a conservative estimate of how long you'll need! (gives 60 hours)
+
+
+###REMEMBER TO COMMENT OUT (#) INSTRUCTIONS FOR ANALYZE MODE, THEN EXECUTE RUN_LIST (dist_run) TO EXECUTE RUNS.
+#### THEN RUN COMMAND TO UNZIP ALL THE .SPOP.GZ files ##### #($ find . -name detail-\*.spop.gz | xargs gzip -d)#
+###REMEMBER TO COMMENT OUT (#) INSTRUCTIONS FOR RUNS, THEN EXECUTE RUN_LIST (dist_run) TO EXECUTE ANALYZE MODE.
+#### THEN RUN COMMAND TO RE-ZIP ALL THE .SPOP files to .SPOP.GZ #($ find . -name detail-\*.spop | xargs gzip)#
+#### THEN UNZIP ALL .dat.gz files within analyze directories (gunzip */*.dat) ###
+#### AFTER ANALYZE (R, Python, etc.) SCRIPTS ARE RUN, RE-ZIP .dat files into .dat.gz (gzip */*.dat)###
+
+
+### RUN INSTRUCTIONS ###
+
+
+## DAY 2: repeated-reward environment, positive and negative treatments, all cost combinations
+
+101..110 Ancestors_Env_38tasks_noequ_even_500k ./avida -s $seed -set ENVIRONMENT_FILE setup/environments/env_38tasks_noequ_even.cfg -set EVENT_FILE setup/events/events_500k.cfg -def INST_SET setup/instructions/instset-heads.cfg
