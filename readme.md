@@ -47,7 +47,7 @@ This will contain dataframes and two subdirectories. One, "raw", for copies of u
 
 output_phase1
 
-.
+
 This will contain the individual output directories that correspond to each individual run. Each individual output directory will contain a "data"subfolder with the individual run's data, a "setup" subfolder for storing initial setup files (i.e. environments, events, instruction sets, saved organisms, and saved populations), as well as the avida executable file, the analyze mode configuration file (i.e. 'analyze.cfg'), and the Avida configuration file (i.e. 'avida.cfg').
 
 output_phase2
